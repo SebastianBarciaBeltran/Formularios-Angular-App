@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { Persona } from '../interfaces/persona.interfaces';
+import { Favorito, Persona } from '../interfaces/persona.interfaces';
 
 @Component({
   selector: 'app-dinamicos',
@@ -10,6 +10,8 @@ import { Persona } from '../interfaces/persona.interfaces';
 export class DinamicosComponent implements OnInit {
 
   @ViewChild('miFormulario') miFormulario !: NgForm;
+
+  nuevoJuego: string = '';
 
   persona: Persona = {
     nombre: 'Sebastián',
@@ -23,6 +25,16 @@ export class DinamicosComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  agregarJuego(){
+    const nuevoFavorito: Favorito = {
+      id: this.persona.favoritos.length + 1,
+      nombre: this.nuevoJuego
+    }
+
+    this.persona.favoritos.push( {...nuevoFavorito} );
+    this.nuevoJuego = '';
   }
 
   eliminar( i : number){
