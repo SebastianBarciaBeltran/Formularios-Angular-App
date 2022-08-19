@@ -39,13 +39,19 @@
     <div class="mb-3 row">
         <div class="col-sm-3 col-form-label">Nombre</div>
         <div class="col-sm-9">
-            <input 
-            *ngFor="let juego of persona.favoritos; let i = index"
-            class="form-control mb-1" 
-            required
-            name="favorito_{{ i }}"
-            [(ngModel)]="juego.nombre"
-            >
+            <div class="input-group mb-1" *ngFor="let juego of persona.favoritos; let i = index">
+                <input 
+                class="form-control" 
+                required
+                name="favorito_{{ i }}"
+                [(ngModel)]="juego.nombre"
+                >
+                <button type="button" 
+                (click)="eliminar(i)"
+                class="btn btn-danger float-end " 
+                [disabled]="miFormulario.invalid"
+        >Eliminar</button>
+            </div>
         </div>
     </div>
 

@@ -25,6 +25,9 @@ export class DinamicosComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  eliminar( i : number){
+    this.persona.favoritos.splice(i, 1);
+  }
 
   guardar(){
     console.log('formulario posteado')
