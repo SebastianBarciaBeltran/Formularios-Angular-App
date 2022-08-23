@@ -15,14 +15,34 @@ export class BasicosComponent implements OnInit {
   // });
 
   miFormulario : FormGroup = this.fb.group({
-    producto: ['RTX 4080ti', [Validators.required, Validators.minLength(3)]],
-      precio: [1500, [Validators.required, Validators.min(0)]],
-      existencias: [10, [Validators.required, Validators.min(0)]],
+    producto: [, [Validators.required, Validators.minLength(3)]],
+      precio: [, [Validators.required, Validators.min(0)]],
+      existencias: [, [Validators.required, Validators.min(0)]],
   });
 
   constructor(private fb: FormBuilder) { }
 
   ngOnInit(): void {
+    this.miFormulario.setValue({
+      producto: 'RTX 4080ti',
+      precio: 1000,
+      existencias: 10
+    });
+  }
+
+
+  guardar(){
+    if (this.miFormulario.invalid) {
+      this.miFormulario.markAllAsTouched();
+      return;
+    }
+
+    this.miFormulario.reset();
+  }
+
+  campoEsValido( campo: string ){
+     return this.miFormulario.controls[`${campo}`].errors && 
+            this.miFormulario.controls[`${campo}`].touched
   }
 
 }

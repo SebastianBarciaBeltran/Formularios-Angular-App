@@ -4,7 +4,9 @@
 <div class="row">
     <div class="col">
         <form  [formGroup]="miFormulario"
-               autocomplete="off" >
+               autocomplete="off" 
+               (ngSubmit)="guardar()"
+               >
             <!-- campo de producto -->
             <div class="mb-3 row">
                 <label class="col-sm-3 col-form-labe">Producto</label>
@@ -15,6 +17,7 @@
                             formControlName="producto"
                     >
                     <span class="form-text text-danger"
+                          *ngIf="campoEsValido('producto')"
                     > Debe de ser de 3 letras</span>
                 </div>
             </div>
@@ -29,6 +32,7 @@
                             formControlName="precio"
                     >
                     <span class="form-text text-danger"
+                          *ngIf="campoEsValido('precio')"
                     > El precio debe ser 0 o mayor</span>
                 </div>
             </div>
@@ -41,6 +45,9 @@
                             placeholder="Existencias del producto"
                             formControlName="existencias"
                     >
+                    <span class="form-text text-danger"
+                    *ngIf="campoEsValido('existencias')"
+              > Las existencias debe ser 0 o mayor</span>
                 </div>
             </div>
 
@@ -48,9 +55,9 @@
                 <div class="col">
                     <button class="btn btn-primary float-end" 
                             type="submit"
-                            [disabled]="miFormulario.invalid"
                             >Guardar</button>
-                </div>
+                        </div>
+                        <!-- [disabled]="miFormulario.invalid" -->
             </div>
             
             
@@ -72,6 +79,9 @@
 
         <span>Value</span>
         <pre>{{ miFormulario.value | json }}</pre>
+
+        <span>Precio</span>
+        <pre>{{ miFormulario.controls['precio'].errors | json }}</pre>
 
     </div>
 </div>
