@@ -37,6 +37,10 @@ export class DinamicosComponent implements OnInit {
     this.miFormulario.reset();
   }
 
+  eliminar(i : number){
+    this.favoritosArr.removeAt(i);
+  }  
+
   campoValido(campo: string){
     return this.miFormulario.controls[campo].errors && 
            this.miFormulario.controls[campo].touched;
